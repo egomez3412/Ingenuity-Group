@@ -38,3 +38,8 @@ img {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 3.2vw;
 }
+
+#cards {
+    display: flex;
+    justify-content: space-between;
+}
