@@ -28,11 +28,21 @@ img {
 
 .team-images {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 .bets {
     display: flex;
     justify-content: space-between;
+    text-align: center;
+}
+
+#betLabels {
+  font-size: 1.9vw;
+}
+
+#bet-amount {
+  width: 60%;
+  height: auto;
 }
 
 .score-container {

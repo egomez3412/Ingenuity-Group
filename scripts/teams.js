@@ -154,20 +154,81 @@ function renderCards(timeLeft) {
     spanDates.setAttribute('id', 'spanDates' + spanDatesID.toString());
     spanDates.textContent = month + '/' + day + '/' + '20' + year;
 
+    let divBet = document.createElement('div');
+    divBet.setAttribute('class', 'container');
+
+    let betButton = document.createElement('button');
+    betButton.setAttribute('id', 'button');
+
+    // DIV BETTING
+    let divBetting = document.createElement('div');
+    divBetting.setAttribute('class', 'bets');
+
+    let divBetText1 = document.createElement('div');
+    divBetText1.setAttribute('id', 'bet1');
+
+    let betLabel1 = document.createElement('label');
+    betLabel1.setAttribute('for', 'bet-amount');
+    betLabel1.setAttribute('id', 'betLabels');
+    betLabel1.setAttribute('name', 'bet-amount');
+    betLabel1.textContent = "How much do you want to bet?";
+    
+    //attach br
+
+    let betInput1 = document.createElement('input');
+    betInput1.setAttribute('type', 'number');
+    betInput1.setAttribute('id', 'bet-amount');
+    betInput1.setAttribute('name', 'bet-amount');
+
+    let divBetText2 = document.createElement('div');
+    divBetText2.setAttribute('id', 'bet2');
+
+    let betLabel2 = document.createElement('label');
+    betLabel2.setAttribute('for', 'bet-amount');
+    betLabel2.setAttribute('id', 'betLabels');
+    betLabel2.setAttribute('name', 'bet-amount');
+    betLabel2.textContent = "How much do you want to bet?";
+    
+    //attach br
+
+    let betInput2 = document.createElement('input');
+    betInput2.setAttribute('type', 'number');
+    betInput2.setAttribute('id', 'bet-amount');
+    betInput2.setAttribute('name', 'bet-amount');
+
+    let betBR1 = document.createElement('br');
+    let betBR2 = document.createElement('br');
+
+    divBetText1.appendChild(betLabel1);
+    divBetText1.appendChild(betBR1);
+    divBetText1.appendChild(betInput1);
+    divBetText2.appendChild(betLabel2);
+    divBetText2.appendChild(betBR2);
+    divBetText2.appendChild(betInput2);
+    divBetting.appendChild(divBetText1);
+    divBetting.appendChild(divBetText2);
+
     // Append elements
     divCardContainer.appendChild(divCardBody);
     divCardBody.appendChild(divTeamImages);
+    divCardBody.appendChild(divBetting);
+    
 
     divCardContainer.appendChild(gameTime);
+    divBet.appendChild(betButton);
+
+
 
     divTeamImages.appendChild(cardImages1);
     divTeamImages.appendChild(vs);
     divTeamImages.appendChild(cardImages2);
 
+    
     divCardBody.appendChild(divScore);
     divScore.appendChild(Scoreboard);
     divScore.appendChild(score);
     divScore.appendChild(spanDates);
+    divScore.appendChild(divBet);
     
 
     //Append to document
