@@ -50,19 +50,35 @@
     <div id="cards" class="card" style="margin: auto 10vw;">
         <div class="card-body">
           <div class="team-images">
-            <img src="images/titans.png" alt="">
+            <img src="images/pic01.png" alt="">
             <img id="vs" src="images/vs.png" alt="">
-            <img src="images/tritons.png" alt="">
+            <img src="images/pic02.png" alt="">
           </div>
+
+          <div class="bets">
+            <div id=bet>
+              <label for="bet-amount">How much do you want to bet?</label>
+              <br>
+              <input type="number" id="bet-amount" name="bet-amount">
+            </div>
+            <div id=bet>
+              <label for="bet-amount">How much do you want to bet?</label>
+              <br>
+              <input type="number" id="bet-amount" name="bet-amount">
+            </div>
+          </div>
+
+          
           <div class="score-container">
                 <span>Scoreboard</span>
                 <span>1:1</span>
+                <div class="container"> <button id="button"></button> </div> <!--bet button-->
           </div>
         </div>
     </div>
     <br>
     <div id="container"></div>
-    <div id="test-container"></div>
+    <!--<div id="test-container"></div>-->
     <div id="firebase-test"></div>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -90,6 +106,7 @@
     </script>
     <script src="scripts/teams.js"  charset="utf-8"></script>
     <script src="scripts/remote.js"  charset="utf-8"></script>
+    <script src="scripts/bet.js"  charset="utf-8"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
