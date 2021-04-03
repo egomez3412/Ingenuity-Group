@@ -146,7 +146,7 @@ function renderCards(timeLeft) {
     let day = Math.floor(Math.random() * 30) + 1;
     let month = Math.floor(Math.random() * 11) + 1;
     // let year = Math.floor(Math.random() * 22) + 1;
-    let year = 20; //year 2020
+    let year = 21; //year 2020
     if(year >= 1 && year <= 9)
     {
         year = '0' + year.toString()
