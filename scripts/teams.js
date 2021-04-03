@@ -63,9 +63,10 @@ function renderCards(timeLeft) {
 
     let Scoreboard = document.createElement('span');
     Scoreboard.textContent = "Scoreboard";
-
-    let score1 = Math.floor(Math.random() * 20);
-    let score2 = Math.floor(Math.random() * 20);
+    let score1 = 00; //start with score 0 ?s
+    let score2 = 00;
+    score1 = Math.floor(Math.random() * 10); //originally * 10
+    score2 = Math.floor(Math.random() * 10); //originally * 10
     let score = document.createElement('span');
     if((score1 % 2) == 0)
     {
@@ -96,9 +97,9 @@ function renderCards(timeLeft) {
         // Disable buttons for betting...
       } else {
         gameTime.textContent = 'Time Left: ' + timeLeft;
-        let pointsAddition1 = Math.floor(Math.random() * 4) + 1;
-        let pointsAddition2 = Math.floor(Math.random() * 4) + 1;
-        let modTime = Math.floor(Math.random() * 10) + 2;
+        let pointsAddition1 = Math.floor(Math.random() * 2) + 1; //originally *4
+        let pointsAddition2 = Math.floor(Math.random() * 2) + 1;
+        let modTime = Math.floor(Math.random() * 10) + 3; //originally + 4
         if((timeLeft % modTime) == 0)
         {
             score1 += pointsAddition1;
@@ -144,7 +145,8 @@ function renderCards(timeLeft) {
     let spanDatesID = Math.floor(Math.random() * 50);
     let day = Math.floor(Math.random() * 30) + 1;
     let month = Math.floor(Math.random() * 11) + 1;
-    let year = Math.floor(Math.random() * 22) + 1;
+    // let year = Math.floor(Math.random() * 22) + 1;
+    let year = 20; //year 2020
     if(year >= 1 && year <= 9)
     {
         year = '0' + year.toString()
@@ -155,10 +157,10 @@ function renderCards(timeLeft) {
     spanDates.textContent = month + '/' + day + '/' + '20' + year;
 
     let divBet = document.createElement('div');
-    divBet.setAttribute('class', 'container');
+    divBet.setAttribute('class', 'button-container');
 
     let betButton = document.createElement('button');
-    betButton.setAttribute('id', 'button');
+    betButton.setAttribute('id', 'bet-button');
 
     // DIV BETTING
     let divBetting = document.createElement('div');
@@ -242,5 +244,3 @@ for(let i = 0; i < 5; i++)
 {
     renderCards(45 - i + 1);
 }
-
-
