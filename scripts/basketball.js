@@ -97,10 +97,10 @@ function renderCards(timeLeft) {
         // Disable buttons for betting...
       } else {
         gameTime.textContent = 'Time Left: ' + timeLeft;
-        let pointsAddition1 = Math.floor(Math.random() * 2) + 1; //originally *4
-        let pointsAddition2 = Math.floor(Math.random() * 2) + 1;
-        let modTime = Math.floor(Math.random() * 10) + 3; //originally + 4
-        if((timeLeft % modTime) == 0)
+        let pointsAddition1 = Math.floor(Math.random() * 3) + 2; //originally *4
+        let pointsAddition2 = Math.floor(Math.random() * 3) + 2;
+        let modTime = Math.floor(Math.random() * 10) + 2; //originally + 4
+        if((timeLeft % modTime) == 1)
         {
             score1 += pointsAddition1;
             score2 += pointsAddition2;
