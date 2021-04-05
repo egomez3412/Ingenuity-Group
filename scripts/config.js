@@ -1,7 +1,7 @@
 var firebaseConfig = {
     apiKey: "AIzaSyD61bRVhApNCS3P74nFsxn_Q5nD_zBIHoI",
     authDomain: "unibets.firebaseapp.com",
-    //databaseURL: "https://unibets-default-rtdb.firebaseio.com/",
+    databaseURL: "https://unibets-default-rtdb.firebaseio.com/",
     projectId: "unibets",
     storageBucket: "unibets.appspot.com",
     messagingSenderId: "685335983785",

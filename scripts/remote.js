@@ -6,3 +6,4 @@ db.collection('bets').get().then((snapshot) => {
         document.getElementById("firebase-test").innerHTML += 'Content: ' + span + '<br>'; 
     });
 });
+

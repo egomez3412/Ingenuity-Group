@@ -1,9 +1,13 @@
 function signUp() {
     var email = document.getElementById("Email");
-    //var username = document.getElementById("username").value;
     var password = document.getElementById("password");
 
     const promise = auth.createUserWithEmailAndPassword(email.value, password.value);
+
+    db.collection('users').add({
+        email: email.value,
+        points: 10000
+    });
     promise.catch(e => alert(e.message));
 
     alert("Signed up.");
@@ -33,8 +37,16 @@ auth.onAuthStateChanged(function (user) {
 
         // is signed in
     } else {
-        //alert("Not logged in.");
+        alert("Not logged in.");
 
         // not logged in
     }
 });
+
+function addCollection() {
+    db.collection('users').add({
+        name: "HAHA"
+    });
+    console.log("HAHA");
+
+}

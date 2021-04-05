@@ -20,6 +20,7 @@
 
   <script src="scripts/config.js" charset="utf-8"></script>
   <script src="scripts/form.js" charset="utf-8"></script>
+  <script src="scripts/remote.js" charset="utf-8"></script>
 </head>
 
 <body>
@@ -75,20 +76,21 @@
   <div class="login-page">
     <div class="form">
       
-      <form class="login-form">
+
         <input type="email" placeholder="Email" id="Email" />
         <!-- <input type="text" placeholder="username" id="username" /> -->
         <input type="password" placeholder="password" id="password" />
         <button type="submit" value="Create Account" onclick="signUp()">Create Account</button>
         <button type="submit" value="Login" onclick="signIn()">Sign In</button>
         <button type="submit" value="Log Out" onclick="signOut()">Sign Out</button>
+        
         <p class="message">Not registered? <a href="index.html">Create an account</a></p>
-      </form>
+
     </div>
   </div>
-
+  <button onclick="addCollection()">test</button>
   <script src="scripts/teams.js" charset="utf-8"></script>
-  <script src="scripts/remote.js" charset="utf-8"></script>
+  
   <script src="scripts/bet.js" charset="utf-8"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
