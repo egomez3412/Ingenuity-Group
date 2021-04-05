@@ -9,6 +9,17 @@
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="stylesheets/style.css">
   <title>Login</title>
+
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/8.3.2/firebase-app.js"></script>
+
+  <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+  <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-auth.js"></script>
+
+  <script src="scripts/config.js" charset="utf-8"></script>
+  <script src="scripts/form.js" charset="utf-8"></script>
 </head>
 
 <body>
@@ -63,28 +74,22 @@
 
   <div class="login-page">
     <div class="form">
-      <form class="register-form">
-        <input type="text" placeholder="name" />
-        <input type="password" placeholder="password" />
-        <input type="text" placeholder="email address" />
-        <button>create</button>
-        <p class="message">Already registered? <a href="#">Sign In</a></p>
-      </form>
+      
       <form class="login-form">
-        <input type="text" placeholder="username" id="username" />
+        <input type="email" placeholder="Email" id="Email" />
+        <!-- <input type="text" placeholder="username" id="username" /> -->
         <input type="password" placeholder="password" id="password" />
-        <button type="submit" value="Login" id="login-form-submit" onclick="validate()">Sign In</button>
+        <button type="submit" value="Create Account" onclick="signUp()">Create Account</button>
+        <button type="submit" value="Login" onclick="signIn()">Sign In</button>
+        <button type="submit" value="Log Out" onclick="signOut()">Sign Out</button>
         <p class="message">Not registered? <a href="index.html">Create an account</a></p>
       </form>
     </div>
   </div>
 
-
-
   <script src="scripts/teams.js" charset="utf-8"></script>
   <script src="scripts/remote.js" charset="utf-8"></script>
   <script src="scripts/bet.js" charset="utf-8"></script>
-  <script src="scripts/login.js" charset="utf-8"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
   </script>
