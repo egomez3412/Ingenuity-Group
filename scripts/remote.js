@@ -6,3 +6,10 @@ db.collection('bets').get().then((snapshot) => {
         document.getElementById("firebase-test").innerHTML += 'Content: ' + span + '<br>'; 
     });
 });
+
+function test() {
+    db.collection('bets').add({
+        points: 615465165,
+        name: 'testtttttt'
+    });
+}
