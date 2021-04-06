@@ -13,13 +13,12 @@ function changeLoginOnAuth() {
 */
 function updatePointsOnAuth(email) {
     const points = document.getElementById('points');
-    
     db.collection('users').get().then((snapshot) => {
         snapshot.docs.forEach(doc => {
             datas = doc.data();
-            if(email = datas.email)
+            if(email == datas.email)
             {
-                points.innerHTML = numberWithCommas(datas.points);
+                points.innerHTML = datas.points; //numberWithCommas(datas.points);
             }
         });
     });

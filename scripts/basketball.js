@@ -9,8 +9,19 @@ for(var i = 0; i < 5; i++)
 }
 */
 const teamCards = document.querySelector('#test-container');
+
+const number_of_cards = 5;
+const cardTime = 45;
+const category = 'basketball';
+
+
 /* doc in parameter to access firebase info... */
 function renderCards(timeLeft) {
+
+    //---------------
+    var leftBet = 0;
+    var rightBet = 0;
+    //----------------
 
     let divCardContainer = document.createElement('div');
     divCardContainer.setAttribute('id', 'cards');
@@ -18,6 +29,11 @@ function renderCards(timeLeft) {
     divCardContainer.setAttribute('style', 'margin: auto 10vw;');
 
     let br = document.createElement('br');
+
+    //-----------------------------------------------
+    let divCardForm = document.createElement('form');
+    divCardForm.setAttribute('data-bet-amount', 'form');
+    //-----------------------------------------------
 
     let divCardBody = document.createElement('div');
     divCardBody.setAttribute('class', 'card-body');
@@ -36,13 +52,13 @@ function renderCards(timeLeft) {
     if(num1 > num2)
     {
         
-        cardImages1.setAttribute('src', 'images/basketball0'+ num1.toString() + '.png');
-        cardImages2.setAttribute('src', 'images/basketball0'+ num2.toString() + '.png'); 
+        cardImages1.setAttribute('src', 'images/' + category + '0' + num1.toString() + '.png');
+        cardImages2.setAttribute('src', 'images/' + category + '0' + num2.toString() + '.png'); 
     }
     else if(num1 < num2)
     {
-        cardImages1.setAttribute('src', 'images/basketball0'+ num1.toString() + '.png');
-        cardImages2.setAttribute('src', 'images/basketball0'+ num2.toString() + '.png');
+        cardImages1.setAttribute('src', 'images/' + category + '0' + num1.toString() + '.png');
+        cardImages2.setAttribute('src', 'images/' + category + '0' + num2.toString() + '.png');
     }
     else if(num1 == num2)
     {
@@ -54,8 +70,8 @@ function renderCards(timeLeft) {
         {
             num1 += 1;
         }
-        cardImages1.setAttribute('src', 'images/basketball0'+ num1.toString() + '.png');
-        cardImages2.setAttribute('src', 'images/basketball0'+ num2.toString() + '.png');
+        cardImages1.setAttribute('src', 'images/' + category + '0' + num1.toString() + '.png');
+        cardImages2.setAttribute('src', 'images/' + category + '0' + num2.toString() + '.png');
     }
       
     let divScore = document.createElement('div');
@@ -65,8 +81,8 @@ function renderCards(timeLeft) {
     Scoreboard.textContent = "Scoreboard";
     let score1 = 00; //start with score 0 ?s
     let score2 = 00;
-    score1 = Math.floor(Math.random() * 50) + 25; //originally * 10
-    score2 = Math.floor(Math.random() * 50) + 25; //originally * 10
+    score1 = Math.floor(Math.random() * 10); //originally * 10
+    score2 = Math.floor(Math.random() * 10); //originally * 10
     let score = document.createElement('span');
     if((score1 % 2) == 0)
     {
@@ -78,9 +94,10 @@ function renderCards(timeLeft) {
     }
     
     
-    let gameTimeID = Math.floor(Math.random() * 50);
+    //let gameTimeID = Math.floor(Math.random() * 50);
     let gameTime = document.createElement('span');
-    gameTime.setAttribute('id', 'timeElm' + gameTimeID.toString());
+    //gameTime.setAttribute('id', 'timeElm' + gameTimeID.toString());
+    gameTime.setAttribute('id', 'timeElm');
     gameTime.setAttribute('style', 'justify-content: flex-start; color: red;');
     
     
@@ -95,12 +112,103 @@ function renderCards(timeLeft) {
         clearTimeout(timerId);
         gameTime.textContent = 'Game Ended!';
         // Disable buttons for betting...
+        //const betBtnDisable = document.getElementById('bet-button');
+        // betBtnDisable.setAttribute('style', 'background: gray; color: white; border: none;');
+        //betBtnDisable.getElementById('bet-button').disabled = true;
+        const betBtnAll = document.querySelectorAll('#bet-button');
+        //console.log(betBtnAll);
+        for( var i = 0; i < betBtnAll.length; i++) {
+            var element = betBtnAll[i];
+            element.setAttribute('style', 'background: gray; color: white; border: none;');
+            element.disabled = true;
+            //console.log(element);
+            //element.disabled = true;
+        }
+
+        const bet1 = document.querySelectorAll('#bet-amount1');
+        const bet2 = document.querySelectorAll('#bet-amount2');
+        //console.log(bet1);
+        //console.log(bet2);
+        for( var i = 0; i <bet1.length; i++) {
+            var element1 = bet1[i];
+            var element2 = bet2[i];
+            
+            element1.setAttribute('style', 'background: gray;');
+            element2.setAttribute('style', 'background: gray;');
+            element1.disabled = true;
+            element2.disabled = true;
+        }
+        //------------------------------------------------
+        //const points = document.getElementById('points');
+        var pointValue = parseInt(points.innerHTML);
+        console.log(leftBet + " | " + rightBet);
+        if(score1 > score2) {
+            pointValue += leftBet;
+            pointValue -= rightBet;
+            points.innerHTML = pointValue;
+        }
+        else if(score1 < score2) {
+            pointValue += rightBet;
+            pointValue -= leftBet;
+            points.innerHTML = pointValue;
+        }
+        //console.log(pointValue);
+        
+
+        auth.onAuthStateChanged(function (user) {
+            if (user) {
+                var email = user.email;
+                //const points = document.getElementById('points');
+                db.collection('users').get().then((snapshot) => {
+                    snapshot.docs.forEach(doc => {
+                        datas = doc.data();
+                        if(email == datas.email)
+                        {
+                            //console.log(doc.id);
+                            var previousPoints = datas.points;
+                            var newPoints = pointValue;
+                            db.collection('users').doc(doc.id).update({points: newPoints});
+                            pointDiff = newPoints - previousPoints;
+                            /*
+                            if(pointDiff > 0)
+                            {
+                                const cardChange = document.querySelectorAll('#cards');
+                                for( var i = 0; i < cardChange.length; i++) {
+                                    var element = cardChange[i];
+                                    //element.setAttribute('style', 'background: rgba(0, 255, 13, 0.774);');
+                                    element.style.background = 'rgba(0, 255, 13, 0.774)';
+                                    //console.log(element);
+                                    //element.disabled = true;
+                                }
+                            }
+                            if(pointDiff < 0)
+                            {
+                                const cardChange = document.querySelectorAll('#cards');
+                                for( var i = 0; i < cardChange.length; i++) {
+                                    var element = cardChange[i];
+                                    //element.setAttribute('style', 'background: rgba(241, 0, 0, 0.774);');
+                                    element.style.background = 'rgba(241, 0, 0, 0.774)';
+                                    //console.log(element);
+                                    //element.disabled = true;
+                                }
+                            }
+                            */
+                            // maybe something sayin how much difference you one in a popup!
+                        }
+                    });
+                });
+
+                
+            }
+        });
+        //------------------------------------------------
+        
       } else {
         gameTime.textContent = 'Time Left: ' + timeLeft;
-        let pointsAddition1 = Math.floor(Math.random() * 3) + 2; //originally *4
-        let pointsAddition2 = Math.floor(Math.random() * 3) + 2;
-        let modTime = Math.floor(Math.random() * 10) + 2; //originally + 4
-        if((timeLeft % modTime) == 1)
+        let pointsAddition1 = Math.floor(Math.random() * 2) + 1; //originally *4
+        let pointsAddition2 = Math.floor(Math.random() * 2) + 1;
+        let modTime = Math.floor(Math.random() * 10) + 3; //originally + 4
+        if((timeLeft % modTime) == 0)
         {
             score1 += pointsAddition1;
             score2 += pointsAddition2;
@@ -161,6 +269,7 @@ function renderCards(timeLeft) {
 
     let betButton = document.createElement('button');
     betButton.setAttribute('id', 'bet-button');
+    betButton.setAttribute('type', 'submit'); //---
 
     // DIV BETTING
     let divBetting = document.createElement('div');
@@ -179,8 +288,8 @@ function renderCards(timeLeft) {
 
     let betInput1 = document.createElement('input');
     betInput1.setAttribute('type', 'number');
-    betInput1.setAttribute('id', 'bet-amount');
-    betInput1.setAttribute('name', 'bet-amount');
+    betInput1.setAttribute('id', 'bet-amount1');
+    betInput1.setAttribute('name', 'betValue1'); //---
 
     let divBetText2 = document.createElement('div');
     divBetText2.setAttribute('id', 'bet2');
@@ -195,8 +304,8 @@ function renderCards(timeLeft) {
 
     let betInput2 = document.createElement('input');
     betInput2.setAttribute('type', 'number');
-    betInput2.setAttribute('id', 'bet-amount');
-    betInput2.setAttribute('name', 'bet-amount');
+    betInput2.setAttribute('id', 'bet-amount2');
+    betInput2.setAttribute('name', 'betValue2'); //---
 
     let betBR1 = document.createElement('br');
     let betBR2 = document.createElement('br');
@@ -211,7 +320,11 @@ function renderCards(timeLeft) {
     divBetting.appendChild(divBetText2);
 
     // Append elements
-    divCardContainer.appendChild(divCardBody);
+
+    //----------------------------------------
+    divCardContainer.appendChild(divCardForm);
+    divCardForm.appendChild(divCardBody);
+    //----------------------------------------
     divCardBody.appendChild(divTeamImages);
     divCardBody.appendChild(divBetting);
     
@@ -238,9 +351,34 @@ function renderCards(timeLeft) {
     teamCards.appendChild(br);
     //console.log(teamCards);
 
+    //---------------------
+    (function (window) {
+        'use strict';
+        var FORM_SELECTOR = '[data-bet-amount="form"]';
+        var App = window.App;
+
+        var FormHandler = App.FormHandler;
+        var formHandler = new FormHandler(FORM_SELECTOR);
+
+        formHandler.addSubmitHandler(function (data) {
+            //var test = document.getElementById("cards").innerHTML;
+            
+            
+            if(parseInt(data.betValue1) >= 0) leftBet += parseInt(data.betValue1);
+            if(parseInt(data.betValue2) >= 0) rightBet += parseInt(data.betValue2);
+
+            // Set the value after submit stays on input
+
+            //document.getElementById('bet-amount1').setAttribute('value', betValue1);
+            //document.getElementById('bet-amount2').setAttribute('value', betValue2);
+        });
+    })(window);
+
 };
 
-for(let i = 0; i < 5; i++)
+for(let i = 0; i < number_of_cards; i++)
 {
-    renderCards(45 - i + 1);
+    renderCards(cardTime - i + 1); //---
 }
+
+
