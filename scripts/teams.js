@@ -9,15 +9,28 @@ for(var i = 0; i < 5; i++)
 }
 */
 const teamCards = document.querySelector('#test-container');
+
+//---------------
+var leftBet = 0;
+var rightBet = 0;
+var winnings = 0;
+//----------------
+
 /* doc in parameter to access firebase info... */
 function renderCards(timeLeft) {
 
     let divCardContainer = document.createElement('div');
     divCardContainer.setAttribute('id', 'cards');
+    divCardContainer.setAttribute('name', 'card');
     divCardContainer.setAttribute('class', 'card');
     divCardContainer.setAttribute('style', 'margin: auto 10vw;');
 
     let br = document.createElement('br');
+
+    //-----------------------------------------------
+    let divCardForm = document.createElement('form');
+    divCardForm.setAttribute('data-bet-amount', 'form');
+    //-----------------------------------------------
 
     let divCardBody = document.createElement('div');
     divCardBody.setAttribute('class', 'card-body');
@@ -95,6 +108,23 @@ function renderCards(timeLeft) {
         clearTimeout(timerId);
         gameTime.textContent = 'Game Ended!';
         // Disable buttons for betting...
+
+        //------------------------------------------------
+        const points = document.getElementById('points');
+        var pointValue = parseInt(points.innerHTML);
+        console.log(leftBet + " | " + rightBet);
+        if(score1 > score2) {
+            pointValue += leftBet;
+            pointValue -= rightBet;
+            points.innerHTML = pointValue;
+        }
+        else if(score1 < score2) {
+            pointValue += rightBet;
+            pointValue -= leftBet;
+            points.innerHTML = pointValue;
+        }
+        //------------------------------------------------
+        
       } else {
         gameTime.textContent = 'Time Left: ' + timeLeft;
         let pointsAddition1 = Math.floor(Math.random() * 2) + 1; //originally *4
@@ -161,6 +191,7 @@ function renderCards(timeLeft) {
 
     let betButton = document.createElement('button');
     betButton.setAttribute('id', 'bet-button');
+    betButton.setAttribute('type', 'submit'); //---
 
     // DIV BETTING
     let divBetting = document.createElement('div');
@@ -180,7 +211,7 @@ function renderCards(timeLeft) {
     let betInput1 = document.createElement('input');
     betInput1.setAttribute('type', 'number');
     betInput1.setAttribute('id', 'bet-amount');
-    betInput1.setAttribute('name', 'bet-amount');
+    betInput1.setAttribute('name', 'betValue1'); //---
 
     let divBetText2 = document.createElement('div');
     divBetText2.setAttribute('id', 'bet2');
@@ -196,7 +227,7 @@ function renderCards(timeLeft) {
     let betInput2 = document.createElement('input');
     betInput2.setAttribute('type', 'number');
     betInput2.setAttribute('id', 'bet-amount');
-    betInput2.setAttribute('name', 'bet-amount');
+    betInput2.setAttribute('name', 'betValue2'); //---
 
     let betBR1 = document.createElement('br');
     let betBR2 = document.createElement('br');
@@ -211,7 +242,11 @@ function renderCards(timeLeft) {
     divBetting.appendChild(divBetText2);
 
     // Append elements
-    divCardContainer.appendChild(divCardBody);
+
+    //----------------------------------------
+    divCardContainer.appendChild(divCardForm);
+    divCardForm.appendChild(divCardBody);
+    //----------------------------------------
     divCardBody.appendChild(divTeamImages);
     divCardBody.appendChild(divBetting);
     
@@ -240,7 +275,25 @@ function renderCards(timeLeft) {
 
 };
 
-for(let i = 0; i < 5; i++)
+for(let i = 0; i < 1; i++)
 {
-    renderCards(45 - i + 1);
+    renderCards(45 - i + 1); //---
 }
+
+//---------------------
+(function (window) {
+    'use strict';
+    var FORM_SELECTOR = '[data-bet-amount="form"]';
+    var App = window.App;
+
+    var FormHandler = App.FormHandler;
+    var formHandler = new FormHandler(FORM_SELECTOR);
+
+    formHandler.addSubmitHandler(function (data) {
+        //var test = document.getElementById("cards").innerHTML;
+        
+        
+        if(parseInt(data.betValue1) >= 0) leftBet += parseInt(data.betValue1);
+        if(parseInt(data.betValue2) >= 0) rightBet += parseInt(data.betValue2);
+    });
+})(window);
