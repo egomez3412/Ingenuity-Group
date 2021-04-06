@@ -21,7 +21,6 @@ function renderCards(timeLeft) {
 
     let divCardContainer = document.createElement('div');
     divCardContainer.setAttribute('id', 'cards');
-    divCardContainer.setAttribute('name', 'card');
     divCardContainer.setAttribute('class', 'card');
     divCardContainer.setAttribute('style', 'margin: auto 10vw;');
 
