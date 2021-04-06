@@ -19,7 +19,7 @@ function updatePointsOnAuth(email) {
             datas = doc.data();
             if(email = datas.email)
             {
-                points.innerHTML = numberWithCommas(datas.points);
+                points.innerHTML = 10000; //numberWithCommas(datas.points);
             }
         });
     });
