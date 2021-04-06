@@ -378,7 +378,7 @@ function renderCards(timeLeft) {
 
 for(let i = 0; i < number_of_cards; i++)
 {
-    renderCards(cardTime - i + 1); //---
+    renderCards(cardTime); //---
 }
 
 
