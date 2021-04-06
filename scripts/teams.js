@@ -13,7 +13,6 @@ const teamCards = document.querySelector('#test-container');
 //---------------
 var leftBet = 0;
 var rightBet = 0;
-var winnings = 0;
 //----------------
 
 /* doc in parameter to access firebase info... */
