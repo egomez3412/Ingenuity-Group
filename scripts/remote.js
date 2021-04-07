@@ -43,6 +43,7 @@ auth.onAuthStateChanged(function (user) {
     } else {
         alert("Not logged in.");
         window.location.replace('../login.html');
+        //window.location.href = '../login.html';
         // not logged in
     }
 });

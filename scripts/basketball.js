@@ -81,8 +81,8 @@ function renderCards(timeLeft) {
     Scoreboard.textContent = "Scoreboard";
     let score1 = 00; //start with score 0 ?s
     let score2 = 00;
-    score1 = Math.floor(Math.random() * 10); //originally * 10
-    score2 = Math.floor(Math.random() * 10); //originally * 10
+    score1 = Math.floor(Math.random() * 50) + 25; //originally * 10
+    score2 = Math.floor(Math.random() * 50) + 25; //originally * 10
     let score = document.createElement('span');
     if((score1 % 2) == 0)
     {
@@ -205,9 +205,9 @@ function renderCards(timeLeft) {
         
       } else {
         gameTime.textContent = 'Time Left: ' + timeLeft;
-        let pointsAddition1 = Math.floor(Math.random() * 2) + 1; //originally *4
-        let pointsAddition2 = Math.floor(Math.random() * 2) + 1;
-        let modTime = Math.floor(Math.random() * 10) + 3; //originally + 4
+        let pointsAddition1 = Math.floor(Math.random() * 4) + 2; //originally *4
+        let pointsAddition2 = Math.floor(Math.random() * 4) + 2;
+        let modTime = Math.floor(Math.random() * 10) + 2; //originally + 4
         if((timeLeft % modTime) == 0)
         {
             score1 += pointsAddition1;
